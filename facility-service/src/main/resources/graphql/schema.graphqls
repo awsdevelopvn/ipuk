@@ -1,0 +1,52 @@
+type Facility {
+    id: ID!
+    name: String!
+    description: String
+    location: String!
+    price: Float!
+    capacity: Int!
+    status: FacilityStatus!
+    reviews: [Review]
+    averageRating: Float
+}
+
+type Review {
+    id: ID!
+    rating: Int!
+    comment: String
+    userId: ID!
+    createdAt: String!
+}
+
+enum FacilityStatus {
+    AVAILABLE
+    UNAVAILABLE
+    MAINTENANCE
+}
+
+type Query {
+    facility(id: ID!): Facility
+    facilities(page: Int = 0, size: Int = 10): [Facility]!
+    searchFacilities(query: String!, page: Int = 0, size: Int = 10): [Facility]!
+}
+
+type Mutation {
+    createFacility(input: FacilityInput!): Facility!
+    updateFacility(id: ID!, input: FacilityInput!): Facility!
+    deleteFacility(id: ID!): Boolean!
+    addReview(facilityId: ID!, input: ReviewInput!): Review!
+}
+
+input FacilityInput {
+    name: String!
+    description: String
+    location: String!
+    price: Float!
+    capacity: Int!
+    status: FacilityStatus!
+}
+
+input ReviewInput {
+    rating: Int!
+    comment: String
+}

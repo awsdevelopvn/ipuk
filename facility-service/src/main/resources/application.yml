@@ -1,0 +1,37 @@
+# src/main/resources/application.yml
+spring:
+  application:
+    name: facility-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/booking_facility
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  graphql:
+    graphiql:
+      enabled: true
+    schema:
+      printer:
+        enabled: true
+
+server:
+  port: 8081
+  http2:
+    enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  health:
+    db:
+      enabled: true
